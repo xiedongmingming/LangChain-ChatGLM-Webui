@@ -2,27 +2,23 @@ import os
 
 import torch
 
-# device config
-EMBEDDING_DEVICE = "cuda" if torch.cuda.is_available(
-) else "mps" if torch.backends.mps.is_available() else "cpu"
-LLM_DEVICE = "cuda" if torch.cuda.is_available(
-) else "mps" if torch.backends.mps.is_available() else "cpu"
+EMBEDDING_DEVICE = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
+
+LLM_DEVICE = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
+
 num_gpus = torch.cuda.device_count()
 
-# model cache config
 MODEL_CACHE_PATH = os.path.join(os.path.dirname(__file__), 'model_cache')
 
+VECTOR_STORE_PATH = './vector_store'
 
-# vector storage config
-VECTOR_STORE_PATH='./vector_store'
-COLLECTION_NAME='my_collection'
+COLLECTION_NAME = 'my_collection'
 
+init_llm = "ChatGLM-6B-int4"  # 初始LLM模型
 
-# init model config
-init_llm = "ChatGLM-6B-int8"
-init_embedding_model = "text2vec-base"
+init_embedding_model = "text2vec-base"  # 初始EMBEDDING模型
 
-# model config
+# 支持的EMBEDDING模型
 embedding_model_dict = {
     "ernie-tiny": "nghuyong/ernie-3.0-nano-zh",
     "ernie-base": "nghuyong/ernie-3.0-base-zh",
@@ -33,7 +29,7 @@ embedding_model_dict = {
     'paraphrase-multilingual-MiniLM-L12-v2': "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 }
 
-
+# 支持的LLM模型
 llm_model_dict = {
     "chatglm": {
         "ChatGLM-6B": "THUDM/chatglm-6b",

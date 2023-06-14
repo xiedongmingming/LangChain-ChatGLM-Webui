@@ -3,20 +3,18 @@ import os
 import torch
 
 # device config
-EMBEDDING_DEVICE = "cuda" if torch.cuda.is_available(
-) else "mps" if torch.backends.mps.is_available() else "cpu"
-LLM_DEVICE = "cuda" if torch.cuda.is_available(
-) else "mps" if torch.backends.mps.is_available() else "cpu"
+EMBEDDING_DEVICE = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
+
+LLM_DEVICE = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
+
 num_gpus = torch.cuda.device_count()
 
 # model cache config
 MODEL_CACHE_PATH = os.path.join(os.path.dirname(__file__), 'model_cache')
 
-
 # vector storage config
-VECTOR_STORE_PATH='./vector_store'
-COLLECTION_NAME='my_collection'
-
+VECTOR_STORE_PATH = './vector_store'
+COLLECTION_NAME = 'my_collection'
 
 # init model config
 init_llm = "ChatGLM-6B-int8"
@@ -32,7 +30,6 @@ embedding_model_dict = {
     'simbert-base-chinese': 'WangZeJun/simbert-base-chinese',
     'paraphrase-multilingual-MiniLM-L12-v2': "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 }
-
 
 llm_model_dict = {
     "chatglm": {
